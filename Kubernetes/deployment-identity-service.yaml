@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-app
+  template:
+    metadata:
+      labels:
+        app: identity-app
+    spec:
+      containers:
+      - name: identity-app
+        image: ghcr.io/team-one-pos-tech/identity-service:latest
+        ports:
+          - containerPort: 8080
+        env:
+        - name: RABBITMQ_HOST
+          valueFrom:
+            secretKeyRef:
+              name: secret-db
+              key: MYSQL_PASSWORD
+        - name: RABBITMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: configmap-rabbitmq
+              key: RABBITMQ_DEFAULT_USER
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: configmap-rabbitmq
+              key: RABBITMQ_DEFAULT_PASS
+
+        - name: STORAGE_POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: configmap-postgres
+              key: POSTGRES_USER
+        - name: STORAGE_POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: configmap-postgres
+              key: POSTGRES_PASSWORD
+        envFrom:
+            - configMapRef:
+                name: configmap-identity-service
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv-identity-app
+spec:
+  selector:
+    app: identity-app
+  ports:
+  - name: http
+    port: 5001
+    targetPort: 8080
+  type: LoadBalancer
