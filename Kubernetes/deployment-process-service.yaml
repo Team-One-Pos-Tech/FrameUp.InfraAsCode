@@ -17,14 +17,13 @@ spec:
         image: ghcr.io/team-one-pos-tech/frameup-process-service:latest
         ports:
           - containerPort: 8080
-        environment:
         envFrom:
             - configMapRef:
                 name: configmap-process-service
         resources:
           requests:
             memory: "1Gi"
-            cpu: "500m"
+            cpu: "300m"
 
 ---
 apiVersion: v1
@@ -38,4 +37,4 @@ spec:
   - name: process-service-port
     port: 5002
     targetPort: 8080
-  type: LoadBalancer
+  type: ClusterIP

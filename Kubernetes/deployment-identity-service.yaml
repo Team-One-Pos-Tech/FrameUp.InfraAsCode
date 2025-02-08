@@ -22,10 +22,10 @@ spec:
                 name: configmap-identity-service
         resources:
           requests:
-            cpu: "500m"
+            cpu: "50m"
             memory: "5Mi"
           limits:
-            cpu: "1000m"
+            cpu: "100m"
             memory: "1Gi"
 
   strategy:
