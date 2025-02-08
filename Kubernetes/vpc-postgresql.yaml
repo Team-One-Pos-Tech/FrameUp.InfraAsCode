@@ -3,8 +3,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
 spec:
+  selector:
+    matchLabels:
+      app: postgres
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi
