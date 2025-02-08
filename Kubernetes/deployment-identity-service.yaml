@@ -17,6 +17,9 @@ spec:
         image: ghcr.io/team-one-pos-tech/identity-service:latest
         ports:
           - containerPort: 8080
+        env:
+          - name: Auth__Audience
+            value: "http://svc-identity-app:5001"
         envFrom:
             - configMapRef:
                 name: configmap-identity-service

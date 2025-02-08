@@ -32,8 +32,7 @@ spec:
             memory: "1Gi"
       volumes:
       - name: rabbitmq-data
-        persistentVolumeClaim:
-          claimName: rabbitmq-pvc
+        emptyDir: {}
 
   strategy:
     type: RollingUpdate

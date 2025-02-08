@@ -17,13 +17,16 @@ spec:
         image: ghcr.io/team-one-pos-tech/frameup-order-service:latest
         ports:
           - containerPort: 8080
+        env:
+        - name: Settings__Auth__Audience
+          value: "http://svc-identity-app:5001"
         envFrom:
             - configMapRef:
                 name: configmap-order-service
         resources:
           requests:
+            memory: "1Gi"
             cpu: "300m"
-            memory: "5Mi"
 
 ---
 apiVersion: v1

@@ -10,7 +10,7 @@ data:
   Settings__MinIO__SecretKey: 0NbNFEFgK9e2mu4rHkbLuQK2ViBNkTbxCmR5oenu
   Settings__Auth__Key: randomlyGeneratedKey12345randomlyGeneratedKey12345randomlyGeneratedKey12345randomlyGeneratedKey12345
   Settings__Auth__Issuer: FrameUp
-  Settings__Auth__Audience: http://svc-identity-app:8080
+  Settings__Auth__Audience: http://svc-identity-app:5001
   Settings__LogBee__OrganizationId: 8a2de170-dd2c-4bed-b853-bec2ca7bbb5a
   Settings__LogBee__ApplicationId: bafc28c1-0059-4f9d-b19b-ccb0d7c0beb1
   Settings__LogBee__ApiUrl: logbee.backend.dev:44088
