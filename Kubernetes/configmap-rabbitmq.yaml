@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap-db
+  name: configmap-rabbitmq
   labels:
-    app: postgresql-pod
+    app: rabbitmq
   annotations:
     description: "Rabbitmq configmap"
 data:
