@@ -1,49 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: identity-app
+  name: order-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: identity-app
+      app: order-service
   template:
     metadata:
       labels:
-        app: identity-app
+        app: order-service
     spec:
       containers:
-      - name: identity-app
-        image: ghcr.io/team-one-pos-tech/identity-service:latest
+      - name: order-service
+        image: ghcr.io/team-one-pos-tech/frameup-order-service:latest
         ports:
           - containerPort: 8080
+        environment:
         envFrom:
             - configMapRef:
                 name: configmap-identity-service
         resources:
           requests:
             cpu: 1
-            memory: 128Mi
+            memory: 1Gi
           limits:
             cpu: 2
-            memory: 256Mi
-
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+            memory: 5gi
+      volumes:
+      - name: rabbitmq-config
+        configMap:
+          name: rabbitmq-config
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-identity-app
+  name: svc-order-service
 spec:
   selector:
-    app: identity-app
+    app: order-service
   ports:
-  - name: http
-    port: 5001
+  - name: order-service-port
+    port: 5003
     targetPort: 8080
   type: LoadBalancer

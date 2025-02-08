@@ -1,10 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: identity-app-config
+  name: configmap-identity-app
 data:
-  RabbitMQ__Host: svc-rabbitmq
-  Storage__PostgreSQL__Host: svc-postgres
-  Storage__PostgreSQL__Database: frame-up-client
+  Settings__RabbitMQ__ConnectionString: amqp://guest:guest@svc-rabbitmq
+  Settings__PostgreSQL__ConnectionString: Host=svc-postgres;Port=5432;Database=IdentityService;Username=postgres;Password=postgres
   ASPNETCORE_ENVIRONMENT: Development
   ASPNETCORE_HTTP_PORTS: "8080"

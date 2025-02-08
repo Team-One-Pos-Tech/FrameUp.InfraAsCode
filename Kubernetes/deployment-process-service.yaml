@@ -18,34 +18,6 @@ spec:
         ports:
           - containerPort: 8080
         environment:
-
-        env:
-        - name: RABBITMQ_HOST
-          valueFrom:
-            secretKeyRef:
-              name: secret-db
-              key: MYSQL_PASSWORD
-        - name: RABBITMQ_USER
-          valueFrom:
-            secretKeyRef:
-              name: configmap-rabbitmq
-              key: RABBITMQ_DEFAULT_USER
-        - name: RABBITMQ_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: configmap-rabbitmq
-              key: RABBITMQ_DEFAULT_PASS
-
-        - name: STORAGE_POSTGRESQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: configmap-postgres
-              key: POSTGRES_USER
-        - name: STORAGE_POSTGRESQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: configmap-postgres
-              key: POSTGRES_PASSWORD
         envFrom:
             - configMapRef:
                 name: configmap-identity-service
