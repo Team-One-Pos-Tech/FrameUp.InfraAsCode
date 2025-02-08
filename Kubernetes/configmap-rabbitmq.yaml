@@ -7,4 +7,6 @@ metadata:
   annotations:
     description: "Rabbitmq configmap"
 data:
-  USER: user
+  RABBITMQ_DEFAULT_USER: "guest"
+  RABBITMQ_DEFAULT_PASS: "guest"
+  RABBITMQ_MGMT_URL: "http://localhost:15672"

@@ -12,8 +12,6 @@ spec:
       labels:
         app: rabbitmq
     spec:
-      nodeSelector:
-        "kubernetes.io/os": linux
       containers:
       - name: rabbitmq
         image: rabbitmq:4.0-management
@@ -22,30 +20,39 @@ spec:
           name: rabbitmq-amqp
         - containerPort: 15672
           name: rabbitmq-http
-        env:
-        - name: RABBITMQ_DEFAULT_USER
-          value: "username"
-        - name: RABBITMQ_DEFAULT_PASS
-          value: "password"
+        volumeMounts:
+          - name: rabbitmq-data
+            mountPath: /var/lib/rabbitmq
         resources:
           requests:
-            cpu: 10m
-            memory: 128Mi
+            cpu: 100m
+            memory: 250Mi
           limits:
-            cpu: 250m
-            memory: 256Mi
-        volumeMounts:
-        - name: rabbitmq-enabled-plugins
-          mountPath: /etc/rabbitmq/enabled_plugins
-          subPath: enabled_plugins
+            cpu: 200m
+            memory: 500Mi
       volumes:
-      - name: rabbitmq-enabled-plugins
-        configMap:
-          name: rabbitmq-enabled-plugins
-          items:
-          - key: rabbitmq_enabled_plugins
-            path: enabled_plugins
-         
+      - name: rabbitmq-data
+        persistentVolumeClaim:
+          claimName: rabbitmq-pvc
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
 ---
 apiVersion: v1
 kind: Service
@@ -55,10 +62,7 @@ spec:
   selector:
     app: rabbitmq
   ports:
-    - name: rabbitmq-amqp
+    - name: rabbitmq
       port: 5672
       targetPort: 5672
-    - name: rabbitmq-http
-      port: 15672
-      targetPort: 15672
   type: ClusterIP
