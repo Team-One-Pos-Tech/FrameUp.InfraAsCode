@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: process-service-config
+data:
+  Settings__RabbitMQ__ConnectionString: amqp://guest:guest@svc-rabbitmq
+  Settings__PostgreSQL__ConnectionString: Host=svc-postgres;Port=5432;Database=OrderService;Username=postgres;Password=postgres
+  Settings__MinIO__Endpoint: play.min.io
+  Settings__MinIO__AccessKey: KZiVbMtAbJDVxL5CZ5Kv
+  Settings__MinIO__SecretKey: 0NbNFEFgK9e2mu4rHkbLuQK2ViBNkTbxCmR5oenu
+  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_HTTP_PORTS: "8080"
