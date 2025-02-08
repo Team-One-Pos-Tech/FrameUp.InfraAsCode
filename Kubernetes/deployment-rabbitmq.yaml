@@ -25,10 +25,10 @@ spec:
             mountPath: /var/lib/rabbitmq
         resources:
           requests:
-            cpu: 100m
+            cpu: 1
             memory: 250Mi
           limits:
-            cpu: 200m
+            cpu: 2
             memory: 500Mi
       volumes:
       - name: rabbitmq-data
