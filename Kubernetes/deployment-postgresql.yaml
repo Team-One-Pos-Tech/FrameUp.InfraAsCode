@@ -17,16 +17,20 @@ spec:
         image: postgres:latest
         ports:
           - containerPort: 5432
+        environment:
+        envFrom:
+            - configMapRef:
+                name: configmap-postgres
         volumeMounts:
           - name: postgres-data
             mountPath: /var/lib/postgresql/data
         resources:
           requests:
-            cpu: 1
-            memory: 250Mi
+            cpu: "500m"
+            memory: "5Mi"
           limits:
-            cpu: 2
-            memory: 500Mi
+            cpu: "1000m"
+            memory: "1Gi"
       volumes:
       - name: postgres-data
         persistentVolumeClaim:

@@ -20,18 +20,11 @@ spec:
         environment:
         envFrom:
             - configMapRef:
-                name: configmap-identity-service
+                name: configmap-order-service
         resources:
           requests:
-            cpu: 1
-            memory: 1Gi
-          limits:
-            cpu: 2
-            memory: 5gi
-      volumes:
-      - name: rabbitmq-config
-        configMap:
-          name: rabbitmq-config
+            cpu: "500m"
+            memory: "5Mi"
 
 ---
 apiVersion: v1

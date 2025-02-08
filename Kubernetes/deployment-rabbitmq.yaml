@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: rabbitmq
 spec:
-  replicas: "1"
+  replicas: 1
   selector:
     matchLabels:
       app: rabbitmq
@@ -26,10 +26,10 @@ spec:
         resources:
           requests:
             cpu: "500m"
-            memory: "250Mi"
+            memory: "5Mi"
           limits:
             cpu: "1000m"
-            memory: "500Mi"
+            memory: "1Gi"
       volumes:
       - name: rabbitmq-data
         persistentVolumeClaim:

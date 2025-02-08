@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap-order-app
+  name: configmap-order-service
 data:
   Settings__RabbitMQ__ConnectionString: amqp://guest:guest@svc-rabbitmq
   Settings__PostgreSQL__ConnectionString: Host=svc-postgres;Port=5432;Database=OrderService;Username=postgres;Password=postgres
