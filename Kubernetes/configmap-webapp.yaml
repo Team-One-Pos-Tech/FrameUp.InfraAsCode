@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-webapp
+  labels:
+    app: webapp
+  annotations:
+    description: "Webapp configmap"
+data:
+  production: true,
+  identityApiUrl: http://svc-identity-app:5001
+  orderApiUrl: http://svc-order-service:5003
