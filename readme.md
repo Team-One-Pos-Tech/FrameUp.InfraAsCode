@@ -71,4 +71,4 @@ It will create all configmaps, deployment and services.
 
 At the end of this process, you should have a cluster and services like the diagram bellow:
 
-![Diagram](doc/InfraAsCodeDiagram.png)
+![Diagram](doc/InfraAsCodeDiagram_.png)
