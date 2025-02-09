@@ -58,3 +58,16 @@ With this plan complete, you will be able to apply the configurations with the c
 ```sh
    terraform apply main.tfplan
 ```
+
+## Service Deployment - Kubernetes
+
+To deploy all the services at the created cluster, you just need to execute the script:
+
+```sh
+   ./deployment.sh
+```
+
+It will create all configmaps, deployment and services.
+
+At the end of this process, you should have a cluster and services like the diagram bellow:
+
