@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: frameup-webapp
+        image: ghcr.io/team-one-pos-tech/frame-up-webapp:beta-4
+        ports:
+          - containerPort: 80
+        env:
+        - name: identityApiUrl
+          value: "http://svc-identity-app:5001"
+        - name: orderApiUrl
+          value: "http://svc-order-service:5003"
+        envFrom:
+            - configMapRef:
+                name: configmap-webapp
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "5Mi"
+          limits:
+            cpu: "100m"
+            memory: "1Gi"
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-webapp
+spec:
+  selector:
+    app: webapp
+  ports:
+  - name: webapp
+    port: 5000
+    targetPort: 80
+  type: LoadBalancer

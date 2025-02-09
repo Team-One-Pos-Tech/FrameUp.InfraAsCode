@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-rabbitmq
+  labels:
+    app: rabbitmq
+  annotations:
+    description: "Rabbitmq configmap"
+data:
+  RABBITMQ_DEFAULT_USER: "guest"
+  RABBITMQ_DEFAULT_PASS: "guest"
+  RABBITMQ_MGMT_URL: "http://localhost:15672"

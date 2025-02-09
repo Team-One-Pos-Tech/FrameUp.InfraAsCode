@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-identity-service
+data:
+  Settings__RabbitMQ__ConnectionString: amqp://guest:guest@svc-rabbitmq
+  Settings__PostgreSQL__ConnectionString: Host=svc-postgres;Port=5432;Database=IdentityService;Username=postgres;Password=postgres
+  Auth__Key: randomlyGeneratedKey12345randomlyGeneratedKey12345randomlyGeneratedKey12345randomlyGeneratedKey12345
+  Auth__Issuer: FrameUp
+  Auth__Audience: http://svc-identity-app:5001  
+  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_HTTP_PORTS: "8080"
