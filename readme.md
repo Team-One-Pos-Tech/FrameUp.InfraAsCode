@@ -1,6 +1,6 @@
 # Infra as Code
 
-This repository holds the code to setup the Kubernetes infrastructure at Azure AKS by using the files at '/terraform' folder and, deploy all Frameup necessary services and dependencies by using the files at '/kubernetes'.
+This repository holds the code to setup the Kubernetes infrastructure at Azure AKS by using the files at '/terraform' folder and, deploy all Frameup necessary services and dependencies by using the files at `/kubernetes`.
 The main goal of this repository is to make it ease and reproducible all necessary steps to have the app up and running as fast as possible.
 
 ## Infra at Azure - AKS
